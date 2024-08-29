@@ -44,8 +44,8 @@ class BookController extends Controller
         }
         $book = Book::create([
             'name' => $request->name,
-            'desc' => $request->desc,
-            'stock' => $request->stock,
+            'author' => $request->author,
+            'publisher' => $request->publisher,
             'price' => $request->price,
         ]);
         return response()->json(['buku' => $book]);
