@@ -46,7 +46,7 @@ class BookController extends Controller
             'name' => $request->name,
             'author' => $request->author,
             'publisher' => $request->publisher,
-            'price' => $request->price,
+            'year' => $request->year,
         ]);
         return response()->json(['buku' => $book]);
     }
