@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -24,3 +25,4 @@ Route::post('register',[UserController::class,'register']);
 Route::post('login',[UserController::class,'login']);
 
 Route::middleware(['auth:api'])->resource('books',BookController::class);
+Route::middleware(['auth:api'])->resource('categories',CategoryController::class);
