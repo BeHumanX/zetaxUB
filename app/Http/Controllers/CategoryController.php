@@ -40,17 +40,17 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'desc' => 'required',
-        ]); //Validates the request data to ensure 'name' and 'desc' fields are present.
+        ]);                                                         //Validates the request data to ensure 'name' and 'desc' fields are present.
         if ($validator->fails()) {
             return response()->json(
                 $validator->errors(),
                 422
             );
-        } //Return error response once the validator fails
+        }                                                           //Return error response once the validator fails
         $category = new Category([
             'name' => $request->name,
             'desc' => $request->desc,
-        ]); //Creates a new Category instance with data from the current request.
+        ]);                                                         //Creates a new Category instance with data from the current request.
         $category->save();
         return response()->json(['kategori' => $category]);
     }

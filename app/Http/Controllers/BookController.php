@@ -22,7 +22,7 @@ class BookController extends Controller
      * Show the form for creating a new resource.
      */
     public function create() {
-
+        // return response()->json(['message' => 'Please provide book details in the request body'], 200);
     }
 
     /**
@@ -42,12 +42,7 @@ class BookController extends Controller
                 422
             );
         }
-        $book = Book::create([
-            'name' => $request->name,
-            'author' => $request->author,
-            'publisher' => $request->publisher,
-            'year' => $request->year,
-        ]);
+        $book = Book::create($request->all());
         return response()->json(['buku' => $book]);
     }
 
