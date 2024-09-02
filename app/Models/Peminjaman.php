@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use App\Models\Book;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,4 +17,10 @@ class Peminjaman extends Model
         'tanggalPengembalian',
         'status'
     ];
+    public function books(){
+        return $this->belongsTo(Book::class);
+    }
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
 }

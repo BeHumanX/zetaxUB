@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Peminjaman;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
+use App\Models\Category;
 
 class Book extends Model
 {
@@ -14,4 +17,10 @@ class Book extends Model
         'publisher',
         'year'
     ];
+    public function peminjamans(){
+        return $this->hasMany(Peminjaman::class);
+    }
+    public function categories(){
+        return $this->belongsTo(Category::class);
+    }
 }
