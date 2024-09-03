@@ -35,6 +35,7 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'publisher' => 'required|string|max:255',
             'year' => 'required|integer',
+            'category_id' => 'required|exists:categories,id'
         ]);
         if ($validator->fails()) {
             return response()->json(
@@ -72,6 +73,7 @@ class BookController extends Controller
             'author' => 'required|string|max:255',
             'publisher' => 'required|string|max:255',
             'year' => 'required|integer',
+            'category_id' => 'required|exists:categories,id'
         ]);
         if ($validator->fails()) {
             return response()->json(
@@ -84,6 +86,7 @@ class BookController extends Controller
             'author' => $request->author,
             'publisher' => $request->publisher,
             'year' => $request->year,
+            'category_id' => $request->category_id,
         ]);
         $book->save();
         return response()->json(['buku' => $book]);

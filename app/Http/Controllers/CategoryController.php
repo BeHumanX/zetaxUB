@@ -10,7 +10,7 @@ class CategoryController extends Controller
 {
     public function store(Request $request){
         $validator = Validator::make($request->all(), [             //Validates the request data to ensure 'name' and 'desc' fields are present.
-            'name' => 'required',
+            'name' => 'required|string',
             'desc' => 'required',
         ]);                             
         if ($validator->fails()) {
@@ -38,7 +38,7 @@ class CategoryController extends Controller
     }
     public function update(Request $request, Category $category){
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
+            'name' => 'required|string',
             'desc' => 'required',
         ]);                                                         //Validates the request data to ensure 'name' and 'desc' fields are present.
         if ($validator->fails()) {

@@ -15,7 +15,8 @@ class Book extends Model
         'name',
         'author',
         'publisher',
-        'year'
+        'year',
+        'category_id'
     ];
     public function peminjamans(){
         return $this->hasMany(Peminjaman::class);
