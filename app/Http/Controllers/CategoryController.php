@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
+    public function index(){
+        $categories = Category::all();
+        return response()->json(['kategori' => $categories]);
+    }
     public function store(Request $request){
         $validator = Validator::make($request->all(), [             //Validates the request data to ensure 'name' and 'desc' fields are present.
             'name' => 'required|string',
