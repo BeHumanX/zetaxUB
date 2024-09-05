@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('book_id');
             $table->date('tanggalPinjaman');
             $table->date('tanggalPengembalian');
-            $table->enum('status',['dipinjam','dikembalikan','tenggat waktu','dalam stok']);
+            $table->enum('status',['dipinjam','dikembalikan','tenggat_waktu']);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
             $table->timestamps();
