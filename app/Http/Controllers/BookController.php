@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
+use App\Models\Book; 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -21,7 +22,8 @@ class BookController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create() {
+    public function create()
+    {
         // return response()->json(['message' => 'Please provide book details in the request body'], 200);
     }
 
@@ -43,8 +45,12 @@ class BookController extends Controller
                 422
             );
         }
-        $book = Book::create($request->all());
-        return response()->json(['buku' => $book]);
+        if (Gate::any(['isAdmin', 'isStaff'])) {
+            $book = Book::create($request->all());
+            return response()->json(['buku' => $book]);
+        } else {
+            return response()->json(['error' => 'You do not have permission to create books'], 403);
+        }
     }
 
     /**
@@ -88,8 +94,13 @@ class BookController extends Controller
             'year' => $request->year,
             'category_id' => $request->category_id,
         ]);
-        $book->save();
-        return response()->json(['buku' => $book]);
+        
+        if (Gate::any(['isAdmin', 'isStaff'])) {
+            $book->save();
+            return response()->json(['buku' => $book]);
+        } else {
+            return response()->json(['error' => 'You do not have permission to create books'], 403);
+        }
     }
 
     /**

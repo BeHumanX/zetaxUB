@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,10 +24,13 @@ class CategoryController extends Controller
                 422
             );
         }           
-        $category = Category::create([
-            'name' => $request->name,                               //Creates a new Category instance and saves it to the database using Eloquent's create method.
-            'desc' => $request->desc,
-        ]);         
+                
+        if (Gate::any(['isAdmin', 'isStaff'])) {
+            $category = Category::create($request->all());
+            return response()->json(['buku' => $category]);
+        } else {
+            return response()->json(['error' => 'You do not have permission to create books'], 403);
+        }
         return response()->json(['kategori' => $category]);
     }
     public function create() {
@@ -55,8 +59,14 @@ class CategoryController extends Controller
             'name' => $request->name,
             'desc' => $request->desc,
         ]);                                                         //Creates a new Category instance with data from the current request.
-        $category->save();
-        return response()->json(['kategori' => $category]);
+       
+        if (Gate::any(['isAdmin', 'isStaff'])) {
+            $category->save();
+            return response()->json(['buku' => $category]);
+        } else {
+            return response()->json(['error' => 'You do not have permission to create books'], 403);
+        }
+        
     }
     public function delete(Category $category){
         if($category){
